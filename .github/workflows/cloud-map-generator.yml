@@ -28,10 +28,24 @@ jobs:
       run: |
         python main.py --output-dir output
         
+    - name: Check if cloud map was generated
+      run: |
+        if [ -f "output/clouds.jpg" ]; then
+          echo "Cloud map generated successfully"
+          ls -la output/
+        else
+          echo "Cloud map generation failed"
+          exit 1
+        fi
+        
     - name: Commit and push changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add output/clouds.jpg
-        git diff --staged --quiet || git commit -m "Update cloud map - $(date)"
-        git push
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Update cloud map - $(date)"
+          git push
+        fi

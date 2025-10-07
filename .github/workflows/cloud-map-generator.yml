@@ -1,0 +1,37 @@
+name: Cloud Map Generator
+
+on:
+  schedule:
+    # Run every 3 hours (at minute 0 of every 3rd hour)
+    - cron: '0 */3 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  generate-cloud-map:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Generate cloud map
+      run: |
+        python main.py --output-dir output
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add output/clouds.jpg
+        git diff --staged --quiet || git commit -m "Update cloud map - $(date)"
+        git push

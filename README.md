@@ -1,3 +1,13 @@
+# Cloud Map Generator
+
+## Live Cloud Map
+
+![Live Cloud Map](https://raw.githubusercontent.com/BrianHToro/Pythonclouds/main/output/clouds.jpg)
+
+*This image updates automatically every 3 hours with the most recent global cloud cover data from EUMETSAT satellites.*
+
+---
+
 ## Installation
 
 1. Download the project files
@@ -43,7 +53,7 @@ python main.py --config my_config.json
 
 The script generates:
 
-1. **clouds_[timestamp].jpg** - Cloud cover map in 2:1 aspect ratio
+1. **clouds.jpg** - Cloud cover map in 2:1 aspect ratio (overwrites previous image)
 
 ## Data Sources
 

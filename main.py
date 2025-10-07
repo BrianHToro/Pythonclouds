@@ -517,11 +517,8 @@ class CloudMapGenerator:
             logger.error("Failed to process cloud data")
             return False
         
-        # Generate timestamp for filename
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        # Save only the cloud map
-        success = self.save_image(cloud_map, f"clouds_{timestamp}.jpg")
+        # Save only the cloud map (overwrites previous image)
+        success = self.save_image(cloud_map, "clouds.jpg")
         
         if success:
             logger.info("Successfully generated cloud map")
@@ -560,7 +557,7 @@ def main():
     if success:
         print(f"Cloud map generated successfully in {args.output_dir}")
         print("Generated file:")
-        print("- clouds_[timestamp].jpg - Cloud cover map")
+        print("- clouds.jpg - Cloud cover map")
     else:
         print("Failed to generate cloud map")
         sys.exit(1)

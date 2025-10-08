@@ -4,7 +4,7 @@
 
 ![Live Cloud Map](https://raw.githubusercontent.com/BrianHToro/Pythonclouds/main/output/clouds.jpg)
 
-*This image updates automatically every 3 hours with the most recent global cloud cover data from EUMETSAT satellites.*
+*This image is the most recent global cloud cover data from EUMETSAT satellites.* (check last updated)
 
 ---
 

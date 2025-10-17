@@ -396,7 +396,6 @@ class CloudMapGenerator:
     
     def process_cloud_data(self, ir_west, ir_east, dust_west, dust_east, visible_west, visible_east):
         """
-        Process satellite data into a 2:1 cloud cover image using the same algorithm as the Node.js version.
         
         Args:
             ir_west, ir_east: IR images for western and eastern hemispheres
@@ -434,13 +433,6 @@ class CloudMapGenerator:
         
         # Fill gaps at antimeridian using optimized function
         fill_antimeridian_gaps(cloud_array, self.source_width, self.source_height)
-        
-        # Swap hemispheres back to correct orientation
-        # The left half currently contains the eastern hemisphere (0-180°E) 
-        # The right half currently contains the western hemisphere (-180-0°E)
-        # We need to swap them so western hemisphere is on the left, eastern on the right
-        # This matches the Node.js: cloudMap.blit(cloudMap, 0, 0, cloudMap.bitmap.width / 2, 0, cloudMap.bitmap.width / 2, cloudMap.bitmap.height);
-        # cloudMap.blit(cloudMapRight, cloudMap.bitmap.width / 2, 0);
         
         # Save the right half (western hemisphere)
         right_half = cloud_array[:, self.source_width//2:].copy()
